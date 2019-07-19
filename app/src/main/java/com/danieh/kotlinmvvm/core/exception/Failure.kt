@@ -5,11 +5,9 @@ package com.danieh.kotlinmvvm.core.exception
  */
 sealed class Failure {
 
+    abstract class BaseFailure : Failure()
+
     class NetworkConnection : BaseFailure()
     class ServerError(val throwable: Throwable?) : BaseFailure()
-
-    class ReadJson : BaseFailure()
-
-    // Extend this for specific exceptions
-    abstract class BaseFailure : Failure()
+    class BodyNullError : BaseFailure()
 }

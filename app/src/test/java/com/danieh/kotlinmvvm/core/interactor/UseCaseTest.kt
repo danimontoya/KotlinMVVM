@@ -1,8 +1,8 @@
 package com.danieh.kotlinmvvm.core.interactor
 
-import com.danieh.kotlinmvvm.core.exception.Failure
-import com.danieh.kotlinmvvm.core.functional.Either
+import arrow.core.Either
 import com.danieh.kotlinmvvm.AndroidTest
+import com.danieh.kotlinmvvm.core.exception.Failure
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import kotlin.test.assertEquals

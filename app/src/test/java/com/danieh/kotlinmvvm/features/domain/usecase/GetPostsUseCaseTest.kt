@@ -1,7 +1,7 @@
 package com.danieh.kotlinmvvm.features.domain.usecase
 
+import arrow.core.Either
 import com.danieh.kotlinmvvm.UnitTest
-import com.danieh.kotlinmvvm.core.functional.Either
 import com.danieh.kotlinmvvm.core.interactor.UseCase
 import com.danieh.kotlinmvvm.features.data.repository.PostsRepository
 import com.danieh.kotlinmvvm.features.domain.model.Post

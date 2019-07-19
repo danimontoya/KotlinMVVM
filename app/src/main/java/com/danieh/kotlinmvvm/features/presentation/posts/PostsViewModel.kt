@@ -27,11 +27,11 @@ class PostsViewModel @Inject constructor(
     var postUserList: MutableLiveData<List<PostUserView>> = MutableLiveData()
 
     fun getPosts() = getPostsUseCase(UseCase.None()) {
-        it.either(::handleFailure, ::handlePosts)
+        it.fold(::handleFailure, ::handlePosts)
     }
 
     fun getUsers() = getUsersUseCase(UseCase.None()) {
-        it.either(::handleFailure, ::handleUsers)
+        it.fold(::handleFailure, ::handleUsers)
     }
 
     private fun handlePosts(posts: List<Post>) {

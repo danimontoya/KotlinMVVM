@@ -1,10 +1,9 @@
 package com.danieh.kotlinmvvm.features.data.repository
 
+import arrow.core.Either
 import com.danieh.kotlinmvvm.UnitTest
 import com.danieh.kotlinmvvm.core.exception.Failure.NetworkConnection
 import com.danieh.kotlinmvvm.core.exception.Failure.ServerError
-import com.danieh.kotlinmvvm.core.functional.Either
-import com.danieh.kotlinmvvm.core.functional.Either.Right
 import com.danieh.kotlinmvvm.core.platform.NetworkHandler
 import com.danieh.kotlinmvvm.features.data.datasource.PostsService
 import com.danieh.kotlinmvvm.features.data.model.CommentEntity
@@ -59,7 +58,7 @@ class PostsRepositoryTest : UnitTest() {
 
         val posts = repository.posts()
 
-        posts shouldEqual Right(emptyList<Post>())
+        posts shouldEqual Either.Right(emptyList<Post>())
         verify(service).posts()
     }
 
@@ -73,7 +72,7 @@ class PostsRepositoryTest : UnitTest() {
 
         val posts = repository.posts()
 
-        posts shouldEqual Right(listOf(Post(0, 0, "title", "body")))
+        posts shouldEqual Either.Right(listOf(Post(0, 0, "title", "body")))
         verify(service).posts()
     }
 
@@ -84,8 +83,8 @@ class PostsRepositoryTest : UnitTest() {
         val posts = repository.posts()
 
         posts shouldBeInstanceOf Either::class.java
-        posts.isLeft shouldEqual true
-        posts.either({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
+        posts.isLeft() shouldEqual true
+        posts.fold({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
         verifyZeroInteractions(service)
     }
 
@@ -96,8 +95,8 @@ class PostsRepositoryTest : UnitTest() {
         val posts = repository.posts()
 
         posts shouldBeInstanceOf Either::class.java
-        posts.isLeft shouldEqual true
-        posts.either({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
+        posts.isLeft() shouldEqual true
+        posts.fold({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
         verifyZeroInteractions(service)
     }
 
@@ -108,8 +107,8 @@ class PostsRepositoryTest : UnitTest() {
         val posts = repository.posts()
 
         posts shouldBeInstanceOf Either::class.java
-        posts.isLeft shouldEqual true
-        posts.either({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
+        posts.isLeft() shouldEqual true
+        posts.fold({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
     }
 
     @Test
@@ -119,8 +118,8 @@ class PostsRepositoryTest : UnitTest() {
         val posts = repository.posts()
 
         posts shouldBeInstanceOf Either::class.java
-        posts.isLeft shouldEqual true
-        posts.either({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
+        posts.isLeft() shouldEqual true
+        posts.fold({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
     }
 
     @Test
@@ -133,7 +132,7 @@ class PostsRepositoryTest : UnitTest() {
 
         val comments = repository.comments()
 
-        comments shouldEqual Right(emptyList<Comment>())
+        comments shouldEqual Either.Right(emptyList<Comment>())
         verify(service).comments()
     }
 
@@ -147,7 +146,7 @@ class PostsRepositoryTest : UnitTest() {
 
         val comments = repository.comments()
 
-        comments shouldEqual Right(listOf(Comment(0, 0, "", "", "")))
+        comments shouldEqual Either.Right(listOf(Comment(0, 0, "", "", "")))
         verify(service).comments()
     }
 
@@ -158,8 +157,8 @@ class PostsRepositoryTest : UnitTest() {
         val comments = repository.comments()
 
         comments shouldBeInstanceOf Either::class.java
-        comments.isLeft shouldEqual true
-        comments.either({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
+        comments.isLeft() shouldEqual true
+        comments.fold({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
         verifyZeroInteractions(service)
     }
 
@@ -170,8 +169,8 @@ class PostsRepositoryTest : UnitTest() {
         val comments = repository.comments()
 
         comments shouldBeInstanceOf Either::class.java
-        comments.isLeft shouldEqual true
-        comments.either({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
+        comments.isLeft() shouldEqual true
+        comments.fold({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
         verifyZeroInteractions(service)
     }
 
@@ -182,8 +181,8 @@ class PostsRepositoryTest : UnitTest() {
         val comments = repository.comments()
 
         comments shouldBeInstanceOf Either::class.java
-        comments.isLeft shouldEqual true
-        comments.either({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
+        comments.isLeft() shouldEqual true
+        comments.fold({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
     }
 
     @Test
@@ -193,7 +192,7 @@ class PostsRepositoryTest : UnitTest() {
         val comments = repository.comments()
 
         comments shouldBeInstanceOf Either::class.java
-        comments.isLeft shouldEqual true
-        comments.either({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
+        comments.isLeft() shouldEqual true
+        comments.fold({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
     }
 }

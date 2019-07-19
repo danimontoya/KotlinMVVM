@@ -1,7 +1,7 @@
 package com.danieh.kotlinmvvm.features.presentation.postdetails
 
+import arrow.core.Either
 import com.danieh.kotlinmvvm.AndroidTest
-import com.danieh.kotlinmvvm.core.functional.Either
 import com.danieh.kotlinmvvm.features.domain.model.Comment
 import com.danieh.kotlinmvvm.features.domain.usecase.GetCommentsUseCase
 import com.nhaarman.mockito_kotlin.any

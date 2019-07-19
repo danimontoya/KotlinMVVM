@@ -1,8 +1,8 @@
 package com.danieh.kotlinmvvm.features.domain.usecase
 
+import arrow.core.Either
 import com.danieh.kotlinmvvm.UnitTest
 import com.danieh.kotlinmvvm.core.exception.Failure
-import com.danieh.kotlinmvvm.core.functional.Either
 import com.danieh.kotlinmvvm.features.data.repository.PostsRepository
 import com.danieh.kotlinmvvm.features.domain.model.Comment
 import com.nhaarman.mockito_kotlin.given

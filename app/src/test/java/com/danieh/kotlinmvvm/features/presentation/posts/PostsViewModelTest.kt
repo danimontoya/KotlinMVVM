@@ -1,7 +1,7 @@
 package com.danieh.kotlinmvvm.features.presentation.posts
 
+import arrow.core.Either
 import com.danieh.kotlinmvvm.AndroidTest
-import com.danieh.kotlinmvvm.core.functional.Either
 import com.danieh.kotlinmvvm.features.domain.model.Post
 import com.danieh.kotlinmvvm.features.domain.model.User
 import com.danieh.kotlinmvvm.features.domain.usecase.GetPostsUseCase

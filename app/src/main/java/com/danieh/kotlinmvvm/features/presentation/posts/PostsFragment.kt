@@ -10,7 +10,6 @@ import com.danieh.kotlinmvvm.core.exception.Failure
 import com.danieh.kotlinmvvm.core.extension.*
 import com.danieh.kotlinmvvm.core.platform.BaseFragment
 import com.danieh.kotlinmvvm.features.presentation.model.PostUserView
-import com.danieh.kotlinmvvm.features.presentation.model.UserView
 import com.danieh.kotlinmvvm.features.presentation.widget.empty.EmptyListener
 import com.danieh.kotlinmvvm.features.presentation.widget.error.ErrorListener
 import kotlinx.android.synthetic.main.fragment_posts.*
