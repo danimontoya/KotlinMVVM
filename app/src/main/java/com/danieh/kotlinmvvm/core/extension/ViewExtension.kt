@@ -23,4 +23,4 @@ fun View.invisible() {
 }
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
-    LayoutInflater.from(context).inflate(layoutRes, this, false)
+        LayoutInflater.from(context).inflate(layoutRes, this, false)

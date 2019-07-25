@@ -3,11 +3,11 @@ package com.danieh.kotlinmvvm.features.data.model
 import com.danieh.kotlinmvvm.features.domain.model.Comment
 
 data class CommentEntity(
-    val postId: Int,
-    val id: Int,
-    val name: String,
-    val email: String,
-    val body: String
+        val postId: Int,
+        val id: Int,
+        val name: String,
+        val email: String,
+        val body: String
 ) {
     companion object {
         fun empty() = CommentEntity(0, 0, "", "", "")

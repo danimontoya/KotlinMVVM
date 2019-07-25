@@ -32,6 +32,6 @@ class NetworkModule(private val baseUrl: String) {
         val okHttpClient = okHttpClientBuilder.build()
 
         return Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create()).build()
+                .addConverterFactory(GsonConverterFactory.create()).build()
     }
 }

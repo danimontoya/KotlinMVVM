@@ -30,6 +30,11 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 kapt {
@@ -73,11 +78,15 @@ dependencies {
     implementation 'com.google.dagger:dagger-android:2.16'
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2-eap13'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.30.2-eap13'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
 
     // Arrow
     implementation "io.arrow-kt:arrow-core-data:0.9.0"
+
+    // Groupie
+    implementation 'com.xwray:groupie:2.3.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
 
     // LiveData & ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"

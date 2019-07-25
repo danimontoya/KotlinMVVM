@@ -22,7 +22,7 @@
             android:id="@+id/post_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:drawableStart="@android:drawable/ic_menu_info_details"
+            android:drawableStart="@mipmap/ic_logo_post"
             android:drawablePadding="@dimen/posts_icon_padding"
             android:ellipsize="end"
             android:gravity="center_vertical"
@@ -33,7 +33,6 @@
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:textColor="@android:color/black"
             android:textSize="@dimen/posts_title_text_size"
-            android:transitionName="@string/transition_post_to_postdetail"
             tools:text="Row 1Row 1Row 1Row 1Row 1Row 1Row 1Row 1Row 1Row 1Row 1Row 1Row 1Row 1Row 1Row 1Row 1" />
 
         <TextView
@@ -43,7 +42,6 @@
             android:gravity="end|center_vertical"
             android:padding="@dimen/activity_horizontal_margin"
             android:textSize="@dimen/posts_author_text_size"
-            android:transitionName="@string/transition_post_to_postdetail"
             tools:text="Juan" />
 
 

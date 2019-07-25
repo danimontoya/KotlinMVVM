@@ -16,8 +16,8 @@ import javax.inject.Inject
  * Created by danieh on 19/04/2019.
  */
 class PostsViewModel @Inject constructor(
-    private val getPostsUseCase: GetPostsUseCase,
-    private val getUsersUseCase: GetUsersUseCase
+        private val getPostsUseCase: GetPostsUseCase,
+        private val getUsersUseCase: GetUsersUseCase
 ) : BaseViewModel() {
 
     var postList: MutableLiveData<List<PostView>> = MutableLiveData()
@@ -58,7 +58,7 @@ class PostsViewModel @Inject constructor(
         for (postView: PostView in postListValue) {
             val userView = userList.value?.find { postView.userId == it.id }
             val postUserView = PostUserView(
-                postView.userId, postView.id, postView.title, postView.body, userView?.name
+                    postView.userId, postView.id, postView.title, postView.body, userView?.name
                     ?: "Unknown"
             )
             listPostUserView.add(postUserView)

@@ -6,8 +6,6 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.ChangeBounds
-import androidx.transition.TransitionInflater
 import androidx.transition.TransitionManager
 import com.danieh.kotlinmvvm.R
 import com.danieh.kotlinmvvm.core.exception.Failure
@@ -17,10 +15,11 @@ import com.danieh.kotlinmvvm.features.presentation.model.CommentView
 import com.danieh.kotlinmvvm.features.presentation.postdetails.PostDetailsFragmentArgs.fromBundle
 import com.danieh.kotlinmvvm.features.presentation.widget.empty.EmptyListener
 import com.danieh.kotlinmvvm.features.presentation.widget.error.ErrorListener
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_post_details.*
 import kotlinx.android.synthetic.main.fragment_posts.view_empty
 import kotlinx.android.synthetic.main.fragment_posts.view_error
-import javax.inject.Inject
 
 
 class PostDetailsFragment : BaseFragment() {
@@ -45,17 +44,11 @@ class PostDetailsFragment : BaseFragment() {
         arguments?.let { fromBundle(it).postAuthor }
     }
 
-    @Inject
-    lateinit var commentsAdapter: CommentsAdapter
+    private val commentsAdapter = GroupAdapter<ViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
-
-        val transition = TransitionInflater.from(activity).inflateTransition(android.R.transition.move)
-        sharedElementEnterTransition = ChangeBounds().apply {
-            enterTransition = transition
-        }
 
         viewModel = viewModel(viewModelFactory) {
             observe(commentList, ::showComments)
@@ -79,8 +72,8 @@ class PostDetailsFragment : BaseFragment() {
         postId?.let { getComments(it) }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             android.R.id.home -> {
                 fragmentManager?.popBackStack()
                 return true
@@ -97,12 +90,12 @@ class PostDetailsFragment : BaseFragment() {
         view_error.gone()
         progress_comments.gone()
         if (comments != null && comments.isNotEmpty()) {
-            comments.toCollection(commentsAdapter.collection)
-            commentsAdapter.notifyDataSetChanged()
+            val items = comments.map { CommentItem(it) }
+            commentsAdapter.addAll(items)
             recycler_comments.visible()
             TransitionManager.beginDelayedTransition(post_details_root)
             post_comments.text =
-                String.format(getString(R.string.post_details_comments_count), commentsAdapter.itemCount.toString())
+                    String.format(getString(R.string.post_details_comments_count), commentsAdapter.itemCount.toString())
         } else {
             view_empty.visible()
         }

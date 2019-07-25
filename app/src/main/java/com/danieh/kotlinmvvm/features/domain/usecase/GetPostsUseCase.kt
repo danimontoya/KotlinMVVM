@@ -9,7 +9,7 @@ import javax.inject.Inject
  * Created by danieh on 19/04/2019.
  */
 class GetPostsUseCase @Inject constructor(private val postsRepository: PostsRepository) :
-    UseCase<List<Post>, UseCase.None>() {
+        UseCase<List<Post>, UseCase.None>() {
 
     override suspend fun run(params: None) = postsRepository.posts()
 }

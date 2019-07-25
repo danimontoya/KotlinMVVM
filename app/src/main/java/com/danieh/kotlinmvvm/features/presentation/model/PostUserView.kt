@@ -8,9 +8,9 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 data class PostUserView(
-    val userId: Int,
-    val id: Int,
-    val title: String,
-    val body: String,
-    val userName: String
+        val userId: Int,
+        val id: Int,
+        val title: String,
+        val body: String,
+        val userName: String
 ) : Parcelable

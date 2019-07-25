@@ -2,6 +2,7 @@ package com.danieh.kotlinmvvm.features.data.repository
 
 import arrow.core.Either
 import com.danieh.kotlinmvvm.UnitTest
+import com.danieh.kotlinmvvm.core.exception.Failure
 import com.danieh.kotlinmvvm.core.exception.Failure.NetworkConnection
 import com.danieh.kotlinmvvm.core.exception.Failure.ServerError
 import com.danieh.kotlinmvvm.core.platform.NetworkHandler
@@ -49,7 +50,7 @@ class PostsRepositoryTest : UnitTest() {
     }
 
     @Test
-    fun `posts should return empty list by default`() {
+    fun `posts should return a failure if body is null`() {
         given { networkHandler.isConnected }.willReturn(true)
         given { postsResponse.body() }.willReturn(null)
         given { postsResponse.isSuccessful }.willReturn(true)
@@ -58,7 +59,8 @@ class PostsRepositoryTest : UnitTest() {
 
         val posts = repository.posts()
 
-        posts shouldEqual Either.Right(emptyList<Post>())
+        posts.isLeft() shouldEqual true
+        posts.fold({ failure -> failure shouldBeInstanceOf Failure.BodyNullError::class.java }, {})
         verify(service).posts()
     }
 
@@ -123,7 +125,7 @@ class PostsRepositoryTest : UnitTest() {
     }
 
     @Test
-    fun `comments should return empty list by default`() {
+    fun `comments should return a failure if body is null`() {
         given { networkHandler.isConnected }.willReturn(true)
         given { commentsResponse.body() }.willReturn(null)
         given { commentsResponse.isSuccessful }.willReturn(true)
@@ -132,7 +134,8 @@ class PostsRepositoryTest : UnitTest() {
 
         val comments = repository.comments()
 
-        comments shouldEqual Either.Right(emptyList<Comment>())
+        comments.isLeft() shouldEqual true
+        comments.fold({ failure -> failure shouldBeInstanceOf Failure.BodyNullError::class.java }, {})
         verify(service).comments()
     }
 

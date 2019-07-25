@@ -20,7 +20,7 @@ interface PostsRepository {
     fun users(): Either<Failure, List<User>>
 
     class Network @Inject constructor(private val networkHandler: NetworkHandler, private val service: PostsService) :
-        PostsRepository {
+            PostsRepository {
 
         override fun posts(): Either<Failure, List<Post>> {
             return when (networkHandler.isConnected) {
@@ -49,7 +49,7 @@ interface PostsRepository {
                 when (response.isSuccessful) {
                     true -> {
                         response.body()?.let { Either.Right(transform(it)) }
-                            ?: Either.Left(Failure.BodyNullError())
+                                ?: Either.Left(Failure.BodyNullError())
                     }
                     false -> Either.Left(Failure.ServerError(Throwable(response.errorBody()?.string())))
                 }

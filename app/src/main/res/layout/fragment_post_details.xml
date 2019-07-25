@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/post_details_root"
@@ -25,12 +26,11 @@
             android:padding="@dimen/activity_horizontal_margin"
             android:textColor="@android:color/black"
             android:textSize="@dimen/posts_title_header_text_size"
-            android:transitionName="@string/transition_post_to_postdetail"
             app:layout_constraintBottom_toTopOf="@id/post_author"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/app_name" />
+            tools:text="@string/app_name"/>
 
         <TextView
             android:id="@+id/post_author"
@@ -42,12 +42,11 @@
             android:gravity="end|center_vertical"
             android:lineSpacingExtra="2dp"
             android:textSize="@dimen/posts_author_text_size"
-            android:transitionName="@string/transition_post_to_postdetail"
             app:layout_constraintBottom_toTopOf="@id/divider_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/post_title"
-            tools:text="@string/app_name" />
+            tools:text="@string/app_name"/>
 
         <View
             android:id="@+id/divider_title"
@@ -59,7 +58,7 @@
             app:layout_constraintBottom_toTopOf="@id/post_body"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/post_author" />
+            app:layout_constraintTop_toBottomOf="@id/post_author"/>
 
         <TextView
             android:id="@+id/post_body"
@@ -74,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_title"
-            tools:text="@string/app_name" />
+            tools:text="@string/app_name"/>
 
         <View
             android:id="@+id/divider_body"
@@ -86,7 +85,7 @@
             app:layout_constraintBottom_toTopOf="@id/post_comments"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/post_body" />
+            app:layout_constraintTop_toBottomOf="@id/post_body"/>
 
         <TextView
             android:id="@+id/post_comments"
@@ -99,7 +98,7 @@
             app:layout_constraintBottom_toTopOf="@id/divider_comments"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_body" />
+            app:layout_constraintTop_toBottomOf="@id/divider_body"/>
 
         <View
             android:id="@+id/divider_comments"
@@ -110,7 +109,7 @@
             android:background="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/post_comments" />
+            app:layout_constraintTop_toBottomOf="@id/post_comments"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_comments"
@@ -123,7 +122,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_comments"
-            tools:visibility="visible" />
+            tools:visibility="visible"/>
 
         <ProgressBar
             android:id="@+id/progress_comments"
@@ -135,7 +134,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_comments" />
+            app:layout_constraintTop_toBottomOf="@id/divider_comments"/>
 
         <com.danieh.kotlinmvvm.features.presentation.widget.empty.EmptyView
             android:id="@+id/view_empty"
@@ -148,7 +147,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_comments"
-            tools:visibility="gone" />
+            tools:visibility="gone"/>
 
         <com.danieh.kotlinmvvm.features.presentation.widget.error.ErrorView
             android:id="@+id/view_error"
@@ -161,7 +160,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_comments"
-            tools:visibility="gone" />
+            tools:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

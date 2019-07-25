@@ -2,7 +2,6 @@ package com.danieh.kotlinmvvm.features.presentation.posts
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.danieh.kotlinmvvm.R
@@ -12,8 +11,9 @@ import com.danieh.kotlinmvvm.core.platform.BaseFragment
 import com.danieh.kotlinmvvm.features.presentation.model.PostUserView
 import com.danieh.kotlinmvvm.features.presentation.widget.empty.EmptyListener
 import com.danieh.kotlinmvvm.features.presentation.widget.error.ErrorListener
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_posts.*
-import javax.inject.Inject
 
 class PostsFragment : BaseFragment() {
 
@@ -21,8 +21,7 @@ class PostsFragment : BaseFragment() {
 
     private lateinit var viewModel: PostsViewModel
 
-    @Inject
-    lateinit var postsAdapter: PostsAdapter
+    private val postsAdapter = GroupAdapter<ViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,21 +38,9 @@ class PostsFragment : BaseFragment() {
 
         setupViewListeners()
 
-        recycler_posts.layoutManager = LinearLayoutManager(context)
-        recycler_posts.adapter = postsAdapter
-
-        postsAdapter.clickListener = { postView, textView ->
-
-            val extras = FragmentNavigatorExtras(
-                    textView to getString(R.string.transition_post_to_postdetail)
-            )
-            val navDirections = PostsFragmentDirections.actionPostsFragmentToPostDetailsFragment().apply {
-                postId = postView.id
-                postTitle = postView.title
-                postBody = postView.body
-                postAuthor = postView.userName
-            }
-            findNavController().navigate(navDirections, extras)
+        recycler_posts.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = postsAdapter
         }
 
         getPosts()
@@ -88,8 +75,18 @@ class PostsFragment : BaseFragment() {
         view_error.gone()
         progress_posts.gone()
         if (posts != null && posts.isNotEmpty()) {
-            posts.toCollection(postsAdapter.collection)
-            postsAdapter.notifyDataSetChanged()
+            val items = posts.map { postUserView ->
+                PostItem(postUserView, clickListener = { postView ->
+                    val navDirections = PostsFragmentDirections.actionPostsFragmentToPostDetailsFragment().apply {
+                        postId = postView.id
+                        postTitle = postView.title
+                        postBody = postView.body
+                        postAuthor = postView.userName
+                    }
+                    findNavController().navigate(navDirections)
+                })
+            }
+            postsAdapter.addAll(items)
             recycler_posts.visible()
         } else {
             view_empty.visible()

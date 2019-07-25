@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">BabylonHealth</string>
-    <string name="toolbar_title">BabylonHealth</string>
+
+    <string name="app_name">Zinio</string>
+    <string name="toolbar_title">Zinio</string>
 
     <string name="label_posts_fragment">Posts</string>
     <string name="label_post_details_fragment">Post Details</string>
@@ -13,5 +14,4 @@
     <string name="button_check_again">Check again</string>
     <string name="button_try_again">Try again</string>
 
-    <string name="transition_post_to_postdetail">post_title</string>
 </resources>
