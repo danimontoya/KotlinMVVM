@@ -14,10 +14,9 @@ class PostDetailsViewModel @Inject constructor(private val getCommentsUseCase: G
 
     var commentList: MutableLiveData<List<CommentView>> = MutableLiveData()
 
-    fun getCommentsByPostId(postId: Int) =
-            getCommentsUseCase(GetCommentsUseCase.Params(postId)) {
-                it.fold(::handleFailure, ::onGetCommentsSuccess)
-            }
+    fun getCommentsByPostId(postId: Int) = getCommentsUseCase(GetCommentsUseCase.Params(postId)) {
+        it.fold(::handleFailure, ::onGetCommentsSuccess)
+    }
 
     private fun onGetCommentsSuccess(comments: List<Comment>) {
         commentList.value = comments.map { it.toCommentView() }

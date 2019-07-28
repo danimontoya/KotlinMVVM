@@ -17,11 +17,11 @@ class KotlinMVVMApp : Application() {
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         DaggerApplicationComponent
-                .builder()
-                .applicationModule(ApplicationModule(this))
-                .networkModule(NetworkModule(BASE_URL))
-                .dataModule(DataModule())
-                .build()
+            .builder()
+            .applicationModule(ApplicationModule(this))
+            .networkModule(NetworkModule(BASE_URL))
+            .dataModule(DataModule())
+            .build()
     }
 
     override fun onCreate() {

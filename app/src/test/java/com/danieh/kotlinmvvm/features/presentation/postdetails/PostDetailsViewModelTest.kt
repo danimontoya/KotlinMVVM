@@ -31,7 +31,7 @@ class PostDetailsViewModelTest : AndroidTest() {
     }
 
     @Test
-    fun `get posts, retrieve all posts from the use case successfully`() {
+    fun `get comments, retrieve all comments from the use case successfully`() {
 
         // Given or Arrange
         val commentsList = listOf(Comment(0, 0, "Comment0", "email0", "body"), Comment(1, 1, "Comment1", "email1", "body"))

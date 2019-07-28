@@ -67,8 +67,7 @@ class PostsFragment : BaseFragment() {
 
     private fun getPosts() {
         progress_posts.visible()
-        viewModel.getPosts()
-        viewModel.getUsers()
+        viewModel.getPostsUsers()
     }
 
     private fun onGetPostsSuccess(posts: List<PostUserView>?) {
@@ -96,6 +95,9 @@ class PostsFragment : BaseFragment() {
     private fun showError(failure: Failure?) {
         progress_posts.gone()
         view_error.visible()
-        notify("ServerError")
+        when (failure) {
+            is Failure.PostsUsersError -> notify("PostsUsersError")
+            is Failure.ServerError -> notify("ServerError")
+        }
     }
 }

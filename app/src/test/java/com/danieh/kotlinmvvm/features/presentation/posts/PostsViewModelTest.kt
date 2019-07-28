@@ -2,10 +2,8 @@ package com.danieh.kotlinmvvm.features.presentation.posts
 
 import arrow.core.Either
 import com.danieh.kotlinmvvm.AndroidTest
-import com.danieh.kotlinmvvm.features.domain.model.Post
-import com.danieh.kotlinmvvm.features.domain.model.User
-import com.danieh.kotlinmvvm.features.domain.usecase.GetPostsUseCase
-import com.danieh.kotlinmvvm.features.domain.usecase.GetUsersUseCase
+import com.danieh.kotlinmvvm.features.domain.usecase.GetPostsUsersUseCase
+import com.danieh.kotlinmvvm.features.presentation.model.PostUserView
 import com.nhaarman.mockito_kotlin.any
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -22,60 +20,41 @@ import kotlin.test.assertEquals
 class PostsViewModelTest : AndroidTest() {
 
     @Mock
-    lateinit var getPostsUseCase: GetPostsUseCase
-
-    @Mock
-    lateinit var getUsersUseCase: GetUsersUseCase
+    lateinit var getPostsUsersUseCase: GetPostsUsersUseCase
 
     lateinit var postsViewModel: PostsViewModel
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        postsViewModel = PostsViewModel(getPostsUseCase, getUsersUseCase)
+        postsViewModel = PostsViewModel(getPostsUsersUseCase)
     }
 
     @Test
-    fun `get posts, retrieve all posts from the use case successfully`() {
+    fun `get posts and users, retrieve all PostsUsersView from the use case successfully`() {
 
         // Given or Arrange
-        val posts = listOf(Post(0, 0, "Post0", "body"), Post(1, 1, "Post1", "body"))
-        `when`(getPostsUseCase(any(), any())).thenAnswer { answer ->
-            answer.getArgument<(Either<Failure, List<Post>>) -> Unit>(1)(Either.Right(posts))
+        val postsUsersResult = listOf(
+            PostUserView(1, 1, "title1", "body1", "Maria"),
+            PostUserView(2, 2, "title2", "body2", "Pepe"),
+            PostUserView(1, 3, "title3", "body3", "Maria"),
+            PostUserView(2, 4, "title4", "body4", "Pepe")
+        )
+        `when`(getPostsUsersUseCase(any(), any())).thenAnswer { answer ->
+            answer.getArgument<(Either<Failure, List<PostUserView>>) -> Unit>(1)(Either.Right(postsUsersResult))
         }
 
         // Then or Assert
-        postsViewModel.postList.observeForever {
-            assertEquals(it!!.size, 2)
-            assertEquals(it[0].id, 0)
-            assertEquals(it[0].title, "Post0")
-            assertEquals(it[1].id, 1)
-            assertEquals(it[1].title, "Post1")
+        postsViewModel.postUserList.observeForever {
+            assertEquals(it!!.size, 4)
+            assertEquals(it[0].id, 1)
+            assertEquals(it[0].title, "title1")
+            assertEquals(it[1].id, 2)
+            assertEquals(it[1].title, "title2")
+            assertEquals(it[2].userName, "Maria")
         }
 
         // When or Act
-        runBlocking { postsViewModel.getPosts() }
-    }
-
-    @Test
-    fun `get users, retrieve all users from the use case successfully`() {
-
-        // Given or Arrange
-        val users = listOf(User(0, "name0", "username0", "email"), User(1, "name1", "username1", "email"))
-        `when`(getUsersUseCase(any(), any())).thenAnswer { answer ->
-            answer.getArgument<(Either<Failure, List<User>>) -> Unit>(1)(Either.Right(users))
-        }
-
-        // Then or Assert
-        postsViewModel.userList.observeForever {
-            assertEquals(it!!.size, 2)
-            assertEquals(it[0].id, 0)
-            assertEquals(it[0].name, "name0")
-            assertEquals(it[1].id, 1)
-            assertEquals(it[1].name, "name1")
-        }
-
-        // When or Act
-        runBlocking { postsViewModel.getUsers() }
+        runBlocking { postsViewModel.getPostsUsers() }
     }
 }

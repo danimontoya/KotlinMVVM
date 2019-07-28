@@ -1,8 +1,8 @@
 package com.danieh.kotlinmvvm.core.platform
 
 import androidx.lifecycle.MutableLiveData
-import com.danieh.kotlinmvvm.core.exception.Failure
 import com.danieh.kotlinmvvm.AndroidTest
+import com.danieh.kotlinmvvm.core.exception.Failure
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.instanceOf
 import org.junit.Test
